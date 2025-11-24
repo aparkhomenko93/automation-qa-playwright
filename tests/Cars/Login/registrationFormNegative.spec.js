@@ -20,13 +20,13 @@ test.describe.only('Check Registration Form Validation', () => {
             const signupButton = page.getByRole('button', { name: 'Sign up' });
             await signupButton.click();
 
-            const signupPopup =  page.locator('.modal-content');
-            const firstNameFd = await signupPopup.locator('#signupName');
-            const lastNameFd = await signupPopup.locator('#signupLastName');
-            const emailFd = await signupPopup.locator('#signupEmail');
-            const passwordFd = await signupPopup.locator('#signupPassword');
-            const repeatPasswordFd = await signupPopup.locator('#signupRepeatPassword');
-            const submitButton = await signupPopup.locator('.btn-primary');
+            const signupPopup = page.locator('.modal-content');
+            const firstNameFd = signupPopup.locator('#signupName');
+            const lastNameFd = signupPopup.locator('#signupLastName');
+            const emailFd = signupPopup.locator('#signupEmail');
+            const passwordFd = signupPopup.locator('#signupPassword');
+            const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
+            const submitButton = signupPopup.locator('.btn-primary');
 
 
 
@@ -55,13 +55,13 @@ test.describe.only('Check Registration Form Validation', () => {
             const signupButton = page.getByRole('button', { name: 'Sign up' });
             await signupButton.click();
 
-            const signupPopup =  page.locator('.modal-content');
-            const firstNameFd = await signupPopup.locator('#signupName');
-            const lastNameFd = await signupPopup.locator('#signupLastName');
-            const emailFd = await signupPopup.locator('#signupEmail');
-            const passwordFd = await signupPopup.locator('#signupPassword');
-            const repeatPasswordFd = await signupPopup.locator('#signupRepeatPassword');
-            const submitButton = await signupPopup.locator('.btn-primary');
+            const signupPopup = page.locator('.modal-content');
+            const firstNameFd = signupPopup.locator('#signupName');
+            const lastNameFd = signupPopup.locator('#signupLastName');
+            const emailFd = signupPopup.locator('#signupEmail');
+            const passwordFd = signupPopup.locator('#signupPassword');
+            const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
+            const submitButton = signupPopup.locator('.btn-primary');
 
 
 
@@ -90,13 +90,13 @@ test.describe.only('Check Registration Form Validation', () => {
             const signupButton = page.getByRole('button', { name: 'Sign up' });
             await signupButton.click();
 
-            const signupPopup =  page.locator('.modal-content');
-            const firstNameFd = await signupPopup.locator('#signupName');
-            const lastNameFd = await signupPopup.locator('#signupLastName');
-            const emailFd = await signupPopup.locator('#signupEmail');
-            const passwordFd = await signupPopup.locator('#signupPassword');
-            const repeatPasswordFd = await signupPopup.locator('#signupRepeatPassword');
-            const submitButton = await signupPopup.locator('.btn-primary');
+            const signupPopup = page.locator('.modal-content');
+            const firstNameFd = signupPopup.locator('#signupName');
+            const lastNameFd = signupPopup.locator('#signupLastName');
+            const emailFd = signupPopup.locator('#signupEmail');
+            const passwordFd = signupPopup.locator('#signupPassword');
+            const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
+            const submitButton = signupPopup.locator('.btn-primary');
 
 
 
@@ -125,13 +125,13 @@ test.describe.only('Check Registration Form Validation', () => {
             const signupButton = page.getByRole('button', { name: 'Sign up' });
             await signupButton.click();
 
-            const signupPopup =  page.locator('.modal-content');
-            const firstNameFd = await signupPopup.locator('#signupName');
-            const lastNameFd = await signupPopup.locator('#signupLastName');
-            const emailFd = await signupPopup.locator('#signupEmail');
-            const passwordFd = await signupPopup.locator('#signupPassword');
-            const repeatPasswordFd = await signupPopup.locator('#signupRepeatPassword');
-            const submitButton = await signupPopup.locator('.btn-primary');
+            const signupPopup = page.locator('.modal-content');
+            const firstNameFd = signupPopup.locator('#signupName');
+            const lastNameFd = signupPopup.locator('#signupLastName');
+            const emailFd = signupPopup.locator('#signupEmail');
+            const passwordFd = signupPopup.locator('#signupPassword');
+            const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
+            const submitButton = signupPopup.locator('.btn-primary');
 
 
 
@@ -158,13 +158,13 @@ test.describe.only('Check Registration Form Validation', () => {
         const signupButton = page.getByRole('button', { name: 'Sign up' });
         await signupButton.click();
 
-        const signupPopup =  page.locator('.modal-content');
-        const firstNameFd = await signupPopup.locator('#signupName');
-        const lastNameFd = await signupPopup.locator('#signupLastName');
-        const emailFd = await signupPopup.locator('#signupEmail');
-        const passwordFd = await signupPopup.locator('#signupPassword');
-        const repeatPasswordFd = await signupPopup.locator('#signupRepeatPassword');
-        const submitButton = await signupPopup.locator('.btn-primary');
+        const signupPopup = page.locator('.modal-content');
+        const firstNameFd = signupPopup.locator('#signupName');
+        const lastNameFd = signupPopup.locator('#signupLastName');
+        const emailFd = signupPopup.locator('#signupEmail');
+        const passwordFd = signupPopup.locator('#signupPassword');
+        const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
+        const submitButton = signupPopup.locator('.btn-primary');
 
         //Fill all the required fields except the repeat password
         await firstNameFd.fill('Walter');
@@ -186,13 +186,13 @@ test.describe.only('Check Registration Form Validation', () => {
         const signupButton = page.getByRole('button', { name: 'Sign up' });
         await signupButton.click();
 
-        const signupPopup =  page.locator('.modal-content');
-        const firstNameFd = await signupPopup.locator('#signupName');
-        const lastNameFd = await signupPopup.locator('#signupLastName');
-        const emailFd = await signupPopup.locator('#signupEmail');
-        const passwordFd = await signupPopup.locator('#signupPassword');
-        const repeatPasswordFd = await signupPopup.locator('#signupRepeatPassword');
-        const submitButton = await signupPopup.locator('.btn-primary');
+        const signupPopup = page.locator('.modal-content');
+        const firstNameFd = signupPopup.locator('#signupName');
+        const lastNameFd = signupPopup.locator('#signupLastName');
+        const emailFd = signupPopup.locator('#signupEmail');
+        const passwordFd = signupPopup.locator('#signupPassword');
+        const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
+        const submitButton = signupPopup.locator('.btn-primary');
 
         //Fill all the required fields except the repeat password
         await firstNameFd.fill('Walter');

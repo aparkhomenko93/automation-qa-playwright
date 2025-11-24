@@ -23,7 +23,7 @@ test.describe('Registration Smoke', () => {
         const signupButton = page.getByRole('button', { name: 'Sign up' });
         await signupButton.click();
 
-        const signupPopup =  page.locator('.modal-content');
+        const signupPopup = page.locator('.modal-content');
         await signupPopup.locator('#signupName').fill(userData.name);
         await signupPopup.locator('#signupLastName').fill(userData.lastName);
         await signupPopup.locator('#signupEmail').fill(userData.email);
