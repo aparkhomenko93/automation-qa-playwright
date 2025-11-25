@@ -1,0 +1,57 @@
+[
+  {
+    "title": "Invalid First Name - cyrillic",
+    "input": {
+      "firstName": "Игнатий"
+    },
+    "expected": {
+      "message": "Name is invalid"
+    }
+  },
+  {
+    "title": "Invalid First Name - too short",
+    "input": {
+      "firstName": "a"
+    },
+    "expected": {
+      "message": "Name has to be from 2 to 20 characters long"
+    }
+  },
+  {
+    "title": "Invalid First Name - too long",
+    "input": {
+      "firstName": "abcdefghijklmnopqrstu"
+    },
+    "expected": {
+      "message": "Name has to be from 2 to 20 characters long"
+    }
+  },
+  {
+    "title": "Invalid First Name - name with space",
+    "input": {
+      "firstName": "Joe "
+    },
+    "expected": {
+      "message": "Name is invalid"
+    }
+  }
+,
+  {
+    "title": "Invalid First Name - only spaces",
+    "input": {
+      "firstName": "         "
+    },
+    "expected": {
+      "message": "Name is invalid"
+    }
+  },
+  {
+    "title": "Invalid First Name - empty",
+    "input": {
+      "firstName": ""
+    },
+    "expected": {
+      "message": "Name required"
+    }
+  }
+]

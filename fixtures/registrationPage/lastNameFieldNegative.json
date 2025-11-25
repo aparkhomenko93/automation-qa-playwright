@@ -1,0 +1,57 @@
+[
+  {
+    "title": "Invalid Last Name - cyrillic",
+    "input": {
+      "lastName": "Попов"
+    },
+    "expected": {
+      "message": "Last name is invalid"
+    }
+  },
+  {
+    "title": "Invalid Last Name - too short",
+    "input": {
+      "lastName": "a"
+    },
+    "expected": {
+      "message": "Last name has to be from 2 to 20 characters long"
+    }
+  },
+  {
+    "title": "Invalid Last Name - too long",
+    "input": {
+      "lastName": "abcdefghijklmnopqrstu"
+    },
+    "expected": {
+      "message": "Last name has to be from 2 to 20 characters long"
+    }
+  },
+  {
+    "title": "Invalid Last Name - name with space",
+    "input": {
+      "lastName": "Taylor "
+    },
+    "expected": {
+      "message": "Last name is invalid"
+    }
+  }
+,
+  {
+    "title": "Invalid Last Name - only spaces",
+    "input": {
+      "lastName": "      "
+    },
+    "expected": {
+      "message": "Last name is invalid"
+    }
+  },
+  {
+    "title": "Invalid Last Name - empty",
+    "input": {
+      "lastName": ""
+    },
+    "expected": {
+      "message": "Last name required"
+    }
+  }
+]

@@ -29,6 +29,10 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
       baseURL: 'https://qauto.forstudy.space',
+      httpCredentials: {
+          username: 'guest',
+          password: 'welcome2qauto',
+      },
       ignoreHTTPSErrors: true,
       viewport: { width: 1920, height: 1080 },
 

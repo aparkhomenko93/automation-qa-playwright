@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Invalid Email - Missing @ symbol",
+    "input": { "email": "testexample.com" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Multiple @ symbols",
+    "input": { "email": "test@@example.com" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - No local part",
+    "input": { "email": "@example.com" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - No domain part",
+    "input": { "email": "test@" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - No dot in domain",
+    "input": { "email": "test@example" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Local part starts with dot",
+    "input": { "email": ".test@example.com" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Domain ends with dot",
+    "input": { "email": "test@example.com." },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Double dots in domain",
+    "input": { "email": "test@exa..mple.com" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Double dots in local part",
+    "input": { "email": "te..st@example.com" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Spaces in email",
+    "input": { "email": "test @example.com" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Invalid special characters",
+    "input": { "email": "test()@example.com" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Cyrillic characters",
+    "input": { "email": "Попов" },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Only @ and dot",
+    "input": { "email": "@." },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Only spaces",
+    "input": { "email": "     " },
+    "expected": { "message": "Email is incorrect" }
+  },
+  {
+    "title": "Invalid Email - Empty",
+    "input": { "email": "" },
+    "expected": { "message": "Email required" }
+  }
+]
