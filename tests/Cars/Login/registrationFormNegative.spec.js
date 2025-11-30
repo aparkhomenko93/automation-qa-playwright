@@ -5,7 +5,6 @@ import invalidEmails from '../../../src/fixtures/registrationPage/emailFieldNega
 import invalidPasswords from '../../../src/fixtures/registrationPage/passwordFieldNegative.json';
 import { faker } from '@faker-js/faker';
 import HomePg from '../../../src/pageObjects/cars/home/HomePg';
-import GaragePg from '../../../src/pageObjects/cars/garage/GaragePg';
 
 
 

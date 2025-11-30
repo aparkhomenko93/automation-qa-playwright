@@ -33,7 +33,7 @@ test.describe('Registration Smoke', () => {
 
         //Check user is logged in after registration
         await test.step('User should be logged in and see Garage page', async() => {
-            await garagePg.checkDefaultMessage();
+            await garagePg.checkNoCarMessage();
         });
     });
 });

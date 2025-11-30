@@ -9,7 +9,7 @@ export default class GaragePg extends BasePg {
         this.defaultMessage = this.page.locator('app-garage p');
     }
 
-    async checkDefaultMessage() {
+    async checkNoCarMessage() {
         await expect(this.defaultMessage, 'Check user is logged in and can see the default message.')
             .toHaveText('You don’t have any cars in your garage');
     }
