@@ -6,7 +6,6 @@ export default class HomePg extends BasePg {
     constructor(page) {
         super(page, '/');
         this.signUpBtn = page.getByRole('button', { name: 'Sign up' });
-        this.validationMsg = page.locator('div.invalid-feedback p').first();
     }
 
     async openSignUpPopup() {
@@ -14,13 +13,14 @@ export default class HomePg extends BasePg {
         return new SignUpPopup(this.page);
     }
 
-    async signUp(userData){
+    async fillForm(userData){
         const popup = await this.openSignUpPopup();
-        await popup.fillAndSumbit(userData);
+        await popup.fillForm(userData);
+        return popup;
     }
 
-    async signUpNegative(userData){
-        const popup = await this.openSignUpPopup();
-        await popup.fillAndSumbitNegative(userData);
+    async fillFormAndSubmit(userData){
+        const popup = await this.fillForm(userData);
+        await popup.submitForm();
     }
 }

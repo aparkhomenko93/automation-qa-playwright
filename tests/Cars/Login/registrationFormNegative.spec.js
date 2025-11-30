@@ -6,19 +6,14 @@ import invalidPasswords from '../../../src/fixtures/registrationPage/passwordFie
 import { faker } from '@faker-js/faker';
 import HomePg from '../../../src/pageObjects/cars/home/HomePg';
 import GaragePg from '../../../src/pageObjects/cars/garage/GaragePg';
-import SignUpPopup from '../../../src/pageObjects/cars/home/components/SignUpPopup';
 
 
 
 test.describe('Check Registration Form Validation', () => {
     let homePg;
-    let garagePg;
-    let signUpPopup;
 
     test.beforeEach(async({ page }) => {
         homePg = new HomePg(page);
-        garagePg = new GaragePg(page);
-        signUpPopup = new SignUpPopup(page);
 
         await homePg.navigate();
     });
@@ -38,12 +33,12 @@ test.describe('Check Registration Form Validation', () => {
             };
 
             //Fill signup form with incorrect data
-            await homePg.signUpNegative(userData);
+            const popup = await homePg.fillForm(userData);
 
             //Check field validation
-            await expect(homePg.validationMsg).toHaveText(expected.message);
-            await expect(signUpPopup.nameFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
-
+            await expect(popup.validationMsg).toHaveText(expected.message);
+            await expect(popup.nameFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.submitBtn).toBeDisabled();
         });
     }
 
@@ -61,12 +56,12 @@ test.describe('Check Registration Form Validation', () => {
             };
 
             //Fill signup form with incorrect data
-            await homePg.signUpNegative(userData);
+            const popup = await homePg.fillForm(userData);
 
             //Check field validation
-            await expect(homePg.validationMsg).toHaveText(expected.message);
-            await expect(signUpPopup.lastNameFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
-
+            await expect(popup.validationMsg).toHaveText(expected.message);
+            await expect(popup.lastNameFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.submitBtn).toBeDisabled();
         });
     }
 
@@ -84,11 +79,12 @@ test.describe('Check Registration Form Validation', () => {
             };
 
             //Fill signup form with incorrect data
-            await homePg.signUpNegative(userData);
+            const popup = await homePg.fillForm(userData);
 
             //Check field validation
-            await expect(homePg.validationMsg).toHaveText(expected.message);
-            await expect(signUpPopup.emailFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.validationMsg).toHaveText(expected.message);
+            await expect(popup.emailFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.submitBtn).toBeDisabled();
         });
     }
 
@@ -106,11 +102,12 @@ test.describe('Check Registration Form Validation', () => {
             };
 
             //Fill signup form with incorrect data
-            await homePg.signUpNegative(userData);
+            const popup = await homePg.fillForm(userData);
 
             //Check field validation
-            await expect(homePg.validationMsg).toHaveText(expected.message);
-            await expect(signUpPopup.passwordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.validationMsg).toHaveText(expected.message);
+            await expect(popup.passwordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.submitBtn).toBeDisabled();
         });
     }
 
@@ -125,11 +122,12 @@ test.describe('Check Registration Form Validation', () => {
         };
 
         //Fill signup form with incorrect data
-        await homePg.signUpNegative(userData);
+        const popup = await homePg.fillForm(userData);
 
         //Check field validation
-        await expect(homePg.validationMsg).toHaveText('Re-enter password required');
-        await expect(signUpPopup.repeatPasswordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+        await expect(popup.validationMsg).toHaveText('Re-enter password required');
+        await expect(popup.repeatPasswordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+        await expect(popup.submitBtn).toBeDisabled();
     });
 
     test('Invalid Repeat Password - Incorrect repeated password', async({ page })  => {
@@ -143,10 +141,11 @@ test.describe('Check Registration Form Validation', () => {
         };
 
         //Fill signup form with incorrect data
-        await homePg.signUpNegative(userData);
+        const popup = await homePg.fillForm(userData);
 
         //Check field validation
-        await expect(homePg.validationMsg).toHaveText('Passwords do not match');
-        await expect(signUpPopup.repeatPasswordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+        await expect(popup.validationMsg).toHaveText('Passwords do not match');
+        await expect(popup.repeatPasswordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+        await expect(popup.submitBtn).toBeDisabled();
     });
 });

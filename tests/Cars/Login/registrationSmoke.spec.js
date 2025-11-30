@@ -27,9 +27,13 @@ test.describe('Registration Smoke', () => {
         };
 
         //Complete registration process
-        await homePg.signUp(userData);
+        await test.step('Registration of new user', async() => {
+            await homePg.fillFormAndSubmit(userData);
+        });
 
         //Check user is logged in after registration
-        await garagePg.checkDefaultMessage();
+        await test.step('User should be logged in and see Garage page', async() => {
+            await garagePg.checkDefaultMessage();
+        });
     });
 });
