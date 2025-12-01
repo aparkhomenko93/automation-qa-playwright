@@ -1,210 +1,150 @@
 import { expect, test } from '@playwright/test';
-import invalidFirstNames from '../../../fixtures/registrationPage/nameFieldNegative.json';
-import invalidLastNames from '../../../fixtures/registrationPage/lastNameFieldNegative.json';
-import invalidEmails from '../../../fixtures/registrationPage/emailFieldNegative.json';
-import invalidPasswords from '../../../fixtures/registrationPage/passwordFieldNegative.json';
+import invalidFirstNames from '../../../src/fixtures/registrationPage/nameFieldNegative.json';
+import invalidLastNames from '../../../src/fixtures/registrationPage/lastNameFieldNegative.json';
+import invalidEmails from '../../../src/fixtures/registrationPage/emailFieldNegative.json';
+import invalidPasswords from '../../../src/fixtures/registrationPage/passwordFieldNegative.json';
 import { faker } from '@faker-js/faker';
+import HomePg from '../../../src/pageObjects/cars/home/HomePg';
 
 
 
-test.describe.only('Check Registration Form Validation', () => {
+test.describe('Check Registration Form Validation', () => {
+    let homePg;
+
     test.beforeEach(async({ page }) => {
-        await page.goto('/');
+        homePg = new HomePg(page);
+
+        await homePg.navigate();
     });
 
     //First name negative cases check
     for (const { input, expected, title } of invalidFirstNames) {
         test(title, async({ page })  => {
 
-            //Start registration process
-            const signupButton = page.getByRole('button', { name: 'Sign up' });
-            await signupButton.click();
+            //Test user
+            const password = 'Qwerty123';
+            const userData = {
+                'name': input.firstName,
+                'lastName': 'White',
+                'email': faker.internet.email(),
+                'password': password,
+                'repeatPassword': password,
+            };
 
-            const signupPopup = page.locator('.modal-content');
-            const firstNameFd = signupPopup.locator('#signupName');
-            const lastNameFd = signupPopup.locator('#signupLastName');
-            const emailFd = signupPopup.locator('#signupEmail');
-            const passwordFd = signupPopup.locator('#signupPassword');
-            const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
-            const submitButton = signupPopup.locator('.btn-primary');
-
-
-
-            //Fill first name with invalid data
-            await firstNameFd.fill(input.firstName);
-            await firstNameFd.blur();
-
-            //Fill other required fields
-            await lastNameFd.fill('White');
-            await emailFd.fill(faker.internet.email());
-            await passwordFd.fill('Qwerty123');
-            await repeatPasswordFd.fill('Qwerty123');
+            //Fill signup form with incorrect data
+            const popup = await homePg.fillForm(userData);
 
             //Check field validation
-            await expect(page.locator('div.invalid-feedback p')).toHaveText(expected.message);
-            await expect(firstNameFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
-            await expect(submitButton).toBeDisabled();
+            await expect(popup.validationMsg).toHaveText(expected.message);
+            await expect(popup.nameFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.submitBtn).toBeDisabled();
         });
     }
 
     //Last name negative cases check
     for (const { input, expected, title } of invalidLastNames) {
         test(title, async({ page })  => {
+            //Test user
+            const password = 'Qwerty123';
+            const userData = {
+                'name': 'Walter',
+                'lastName': input.lastName,
+                'email': faker.internet.email(),
+                'password': password,
+                'repeatPassword': password,
+            };
 
-            //Start registration process
-            const signupButton = page.getByRole('button', { name: 'Sign up' });
-            await signupButton.click();
-
-            const signupPopup = page.locator('.modal-content');
-            const firstNameFd = signupPopup.locator('#signupName');
-            const lastNameFd = signupPopup.locator('#signupLastName');
-            const emailFd = signupPopup.locator('#signupEmail');
-            const passwordFd = signupPopup.locator('#signupPassword');
-            const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
-            const submitButton = signupPopup.locator('.btn-primary');
-
-
-
-            //Fill last name with invalid data
-            await lastNameFd.fill(input.lastName);
-            await lastNameFd.blur();
-
-            //Fill other required fields
-            await firstNameFd.fill('Mr');
-            await emailFd.fill(faker.internet.email());
-            await passwordFd.fill('Qwerty123');
-            await repeatPasswordFd.fill('Qwerty123');
+            //Fill signup form with incorrect data
+            const popup = await homePg.fillForm(userData);
 
             //Check field validation
-            await expect(page.locator('div.invalid-feedback p')).toHaveText(expected.message);
-            await expect(lastNameFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
-            await expect(submitButton).toBeDisabled();
+            await expect(popup.validationMsg).toHaveText(expected.message);
+            await expect(popup.lastNameFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.submitBtn).toBeDisabled();
         });
     }
 
     //Email negative cases check
     for (const { input, expected, title } of invalidEmails) {
         test(title, async({ page })  => {
+            //Test user
+            const password = 'Qwerty123';
+            const userData = {
+                'name': 'Walter',
+                'lastName': 'White',
+                'email': input.email,
+                'password': password,
+                'repeatPassword': password,
+            };
 
-            //Start registration process
-            const signupButton = page.getByRole('button', { name: 'Sign up' });
-            await signupButton.click();
-
-            const signupPopup = page.locator('.modal-content');
-            const firstNameFd = signupPopup.locator('#signupName');
-            const lastNameFd = signupPopup.locator('#signupLastName');
-            const emailFd = signupPopup.locator('#signupEmail');
-            const passwordFd = signupPopup.locator('#signupPassword');
-            const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
-            const submitButton = signupPopup.locator('.btn-primary');
-
-
-
-            //Fill email with invalid data
-            await emailFd.fill(input.email);
-            await emailFd.blur();
-
-            //Fill other required fields
-            await firstNameFd.fill('Walter');
-            await lastNameFd.fill('White');
-            await passwordFd.fill('Qwerty123');
-            await repeatPasswordFd.fill('Qwerty123');
+            //Fill signup form with incorrect data
+            const popup = await homePg.fillForm(userData);
 
             //Check field validation
-            await expect(page.locator('div.invalid-feedback p')).toHaveText(expected.message);
-            await expect(emailFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
-            await expect(submitButton).toBeDisabled();
+            await expect(popup.validationMsg).toHaveText(expected.message);
+            await expect(popup.emailFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.submitBtn).toBeDisabled();
         });
     }
 
     //Password negative cases check
     for (const { input, expected, title } of invalidPasswords) {
         test(title, async({ page })  => {
+            //Test user
+            const password = input.password;
+            const userData = {
+                'name': 'Walter',
+                'lastName': 'White',
+                'email': faker.internet.email(),
+                'password': password,
+                'repeatPassword': password,
+            };
 
-            //Start registration process
-            const signupButton = page.getByRole('button', { name: 'Sign up' });
-            await signupButton.click();
-
-            const signupPopup = page.locator('.modal-content');
-            const firstNameFd = signupPopup.locator('#signupName');
-            const lastNameFd = signupPopup.locator('#signupLastName');
-            const emailFd = signupPopup.locator('#signupEmail');
-            const passwordFd = signupPopup.locator('#signupPassword');
-            const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
-            const submitButton = signupPopup.locator('.btn-primary');
-
-
-
-            //Fill password with invalid data
-            await passwordFd.fill(input.password);
-            await passwordFd.blur();
-
-            //Fill other required fields
-            await firstNameFd.fill('Walter');
-            await lastNameFd.fill('White');
-            await emailFd.fill(faker.internet.email());
-            await repeatPasswordFd.fill('Qwerty123');
+            //Fill signup form with incorrect data
+            const popup = await homePg.fillForm(userData);
 
             //Check field validation
-            await expect(page.locator('div.invalid-feedback p')).toHaveText(expected.message);
-            await expect(passwordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
-            await expect(submitButton).toBeDisabled();
+            await expect(popup.validationMsg).toHaveText(expected.message);
+            await expect(popup.passwordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+            await expect(popup.submitBtn).toBeDisabled();
         });
     }
 
     test('Invalid Repeat Password - Empty', async({ page })  => {
+        //Test user
+        const userData = {
+            'name': 'Walter',
+            'lastName': 'White',
+            'email': faker.internet.email(),
+            'password': 'Qwerty123',
+            'repeatPassword': '',
+        };
 
-        //Start registration process
-        const signupButton = page.getByRole('button', { name: 'Sign up' });
-        await signupButton.click();
-
-        const signupPopup = page.locator('.modal-content');
-        const firstNameFd = signupPopup.locator('#signupName');
-        const lastNameFd = signupPopup.locator('#signupLastName');
-        const emailFd = signupPopup.locator('#signupEmail');
-        const passwordFd = signupPopup.locator('#signupPassword');
-        const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
-        const submitButton = signupPopup.locator('.btn-primary');
-
-        //Fill all the required fields except the repeat password
-        await firstNameFd.fill('Walter');
-        await lastNameFd.fill('White');
-        await emailFd.fill(faker.internet.email());
-        await passwordFd.fill('Qwerty123');
-        await repeatPasswordFd.focus();
-        await repeatPasswordFd.blur();
+        //Fill signup form with incorrect data
+        const popup = await homePg.fillForm(userData);
 
         //Check field validation
-        await expect(page.locator('div.invalid-feedback p')).toHaveText('Re-enter password required');
-        await expect(repeatPasswordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
-        await expect(submitButton).toBeDisabled();
+        await expect(popup.validationMsg).toHaveText('Re-enter password required');
+        await expect(popup.repeatPasswordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+        await expect(popup.submitBtn).toBeDisabled();
     });
 
     test('Invalid Repeat Password - Incorrect repeated password', async({ page })  => {
+        //Test user
+        const userData = {
+            'name': 'Walter',
+            'lastName': 'White',
+            'email': faker.internet.email(),
+            'password': 'Qwerty123',
+            'repeatPassword': 'Qwerty1234',
+        };
 
-        //Start registration process
-        const signupButton = page.getByRole('button', { name: 'Sign up' });
-        await signupButton.click();
-
-        const signupPopup = page.locator('.modal-content');
-        const firstNameFd = signupPopup.locator('#signupName');
-        const lastNameFd = signupPopup.locator('#signupLastName');
-        const emailFd = signupPopup.locator('#signupEmail');
-        const passwordFd = signupPopup.locator('#signupPassword');
-        const repeatPasswordFd = signupPopup.locator('#signupRepeatPassword');
-        const submitButton = signupPopup.locator('.btn-primary');
-
-        //Fill all the required fields except the repeat password
-        await firstNameFd.fill('Walter');
-        await lastNameFd.fill('White');
-        await emailFd.fill(faker.internet.email());
-        await passwordFd.fill('Qwerty123');
-        await repeatPasswordFd.fill('Qwerty124');
-        await repeatPasswordFd.blur();
+        //Fill signup form with incorrect data
+        const popup = await homePg.fillForm(userData);
 
         //Check field validation
-        await expect(page.locator('div.invalid-feedback p')).toHaveText('Passwords do not match');
-        await expect(repeatPasswordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
-        await expect(submitButton).toBeDisabled();
+        await expect(popup.validationMsg).toHaveText('Passwords do not match');
+        await expect(popup.repeatPasswordFd).toHaveCSS('border-color', 'rgb(220, 53, 69)');
+        await expect(popup.submitBtn).toBeDisabled();
     });
 });

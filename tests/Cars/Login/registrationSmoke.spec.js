@@ -1,10 +1,17 @@
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
+import HomePg from '../../../src/pageObjects/cars/home/HomePg';
+import GaragePg from '../../../src/pageObjects/cars/garage/GaragePg';
 
 test.describe('Registration Smoke', () => {
+    let homePg;
+    let garagePg;
 
     test.beforeEach(async({ page }) => {
-        await page.goto('/');
+        homePg = new HomePg(page);
+        garagePg = new GaragePg(page);
+
+        await homePg.navigate();
     });
 
     //Test Login Smoke
@@ -19,20 +26,14 @@ test.describe('Registration Smoke', () => {
             'password': password,
         };
 
-        //Start registration process
-        const signupButton = page.getByRole('button', { name: 'Sign up' });
-        await signupButton.click();
-
-        const signupPopup = page.locator('.modal-content');
-        await signupPopup.locator('#signupName').fill(userData.name);
-        await signupPopup.locator('#signupLastName').fill(userData.lastName);
-        await signupPopup.locator('#signupEmail').fill(userData.email);
-        await signupPopup.locator('#signupPassword').fill(userData.password);
-        await signupPopup.locator('#signupRepeatPassword').fill(userData.password);
-        await signupPopup.locator('.btn-primary').click();
+        //Complete registration process
+        await test.step('Registration of new user', async() => {
+            await homePg.fillFormAndSubmit(userData);
+        });
 
         //Check user is logged in after registration
-        await expect(page.locator('app-garage p', { hasText: 'You don’t have any cars in your garage' }))
-            .toBeVisible();
+        await test.step('User should be logged in and see Garage page', async() => {
+            await garagePg.checkNoCarMessage();
+        });
     });
 });
