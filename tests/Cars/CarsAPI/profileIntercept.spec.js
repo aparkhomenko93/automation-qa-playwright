@@ -36,7 +36,6 @@ test.describe('Intercept Profile', () => {
         });
 
         await profilePg.navigate();
-        await page.pause();
         await profilePg.verifyProfileInfo(fakeUser);
     });
 });
